@@ -31,7 +31,7 @@ public class Spawner : MonoBehaviour
 
     private Vector3 PoleSpawnPosition()
     {
-        return new Vector3 (transform.position.x, Random.Range(-3f, 3f), 1f);
+        return new Vector3 (transform.position.x, Random.Range(-3f, 3f), 1.5f);
     }
 
 
