@@ -5,10 +5,10 @@ using UnityEngine;
 public class Jumping : MonoBehaviour
 {
     private PlayerInputActions playerInputActions;
-    private Vector3 gravity = new Vector3 (0f, -5f, 0f);
-    private Vector3 upwardForce = new Vector3(0f, 100f, 0f);
+    private Vector3 gravity = new Vector3 (0f, -9.8f, 0f);
+    private Vector3 direction;
     private Rigidbody2D rb;
-    private bool pressed = false;
+    private float strength = 5f;
 
 
     private void Start()
@@ -16,12 +16,14 @@ public class Jumping : MonoBehaviour
         playerInputActions = new PlayerInputActions();
         playerInputActions.Enable();
         rb = GetComponent<Rigidbody2D>();
+        direction = Vector3.zero;
     }
 
     void Update()
     {
-        transform.Translate(gravity * Time.deltaTime);
         playerInputActions.Player.Jump.performed += Jump_performed;
+        direction.y += gravity.y * Time.deltaTime;
+        transform.position += direction * Time.deltaTime;
 
     }
 
@@ -29,7 +31,13 @@ public class Jumping : MonoBehaviour
     {
         if(obj.performed)
         {
-            transform.Translate((upwardForce-gravity) * Time.deltaTime);
+            direction = Vector3.up * strength;
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log(collision.gameObject.name);
+        Time.timeScale = 0f;
     }
 }

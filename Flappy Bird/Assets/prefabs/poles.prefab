@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 5824079214645463512}
   - component: {fileID: 1215248624791699352}
   - component: {fileID: 5237119218785980394}
+  - component: {fileID: 452976316004317566}
   m_Layer: 0
   m_Name: poles
   m_TagString: Untagged
@@ -209,6 +210,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.55, y: 3.3}
   m_EdgeRadius: 0
+--- !u!114 &452976316004317566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5241218130964683229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab77612d856a79d40bc6aabc31cd8f69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7046909181741581390
 GameObject:
   m_ObjectHideFlags: 0
