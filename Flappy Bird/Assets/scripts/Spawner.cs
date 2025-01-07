@@ -7,7 +7,7 @@ public class Spawner : MonoBehaviour
 
     [SerializeField] private Transform poles;
 
-    private float spawnRate = 1.3f;
+    private float spawnRate = 1.5f;
     private float spawnTimer;
 
     void Start()
