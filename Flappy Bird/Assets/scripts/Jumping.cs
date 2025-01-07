@@ -5,9 +5,10 @@ using UnityEngine;
 public class Jumping : MonoBehaviour
 {
     private PlayerInputActions playerInputActions;
-    private Vector3 gravity = new Vector3 (0f, -9.8f, 0f);
-    private Vector3 upwardForce = new Vector3(0f, 20f, 0f);
+    private Vector3 gravity = new Vector3 (0f, -5f, 0f);
+    private Vector3 upwardForce = new Vector3(0f, 100f, 0f);
     private Rigidbody2D rb;
+    private bool pressed = false;
 
 
     private void Start()
@@ -19,11 +20,16 @@ public class Jumping : MonoBehaviour
 
     void Update()
     {
-        transform.position += gravity * Time.deltaTime;
+        transform.Translate(gravity * Time.deltaTime);
+        playerInputActions.Player.Jump.performed += Jump_performed;
 
-        if (playerInputActions.Player.Jump.IsPressed())
+    }
+
+    private void Jump_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        if(obj.performed)
         {
-            rb.AddForce(upwardForce * Time.deltaTime);
+            transform.Translate((upwardForce-gravity) * Time.deltaTime);
         }
     }
 }
