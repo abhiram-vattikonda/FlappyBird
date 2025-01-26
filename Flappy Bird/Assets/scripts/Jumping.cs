@@ -4,26 +4,37 @@ using UnityEngine;
 
 public class Jumping : MonoBehaviour
 {
+    public static Jumping instance {  get; private set; }
+
     private PlayerInputActions playerInputActions;
     private Vector3 gravity = new Vector3 (0f, -9.8f, 0f);
     private Vector3 direction;
     private Rigidbody2D rb;
     private float strength = 5f;
 
+    public bool jumpedAtleastOnce;
+
 
     private void Start()
     {
+        if (instance == null)
+            instance = this;
+
         playerInputActions = new PlayerInputActions();
         playerInputActions.Enable();
         rb = GetComponent<Rigidbody2D>();
         direction = Vector3.zero;
+        jumpedAtleastOnce = false;
     }
 
     void Update()
     {
         playerInputActions.Player.Jump.performed += Jump_performed;
-        direction.y += gravity.y * Time.deltaTime;
-        transform.position += direction * Time.deltaTime;
+        if (jumpedAtleastOnce)
+        {
+            direction.y += gravity.y * Time.deltaTime;
+            transform.position += direction * Time.deltaTime;
+        }
 
     }
 
@@ -32,6 +43,7 @@ public class Jumping : MonoBehaviour
         if(obj.performed)
         {
             direction = Vector3.up * strength;
+            if (!jumpedAtleastOnce) jumpedAtleastOnce = true;
         }
     }
 

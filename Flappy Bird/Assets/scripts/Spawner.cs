@@ -18,14 +18,17 @@ public class Spawner : MonoBehaviour
 
 
     private void Update()
-    {
-        if (spawnTimer < 0)
+    {   
+        if (Jumping.instance.jumpedAtleastOnce)
         {
-            Transform pole = Instantiate(poles, PoleSpawnPosition(), Quaternion.identity);
-            spawnTimer = spawnRate;
+            if (spawnTimer < 0)
+            {
+                Transform pole = Instantiate(poles, PoleSpawnPosition(), Quaternion.identity);
+                spawnTimer = spawnRate;
+            }
+            else
+            { spawnTimer -= Time.deltaTime; }
         }
-        else
-        { spawnTimer -= Time.deltaTime; }
     }
 
     private Vector3 PoleSpawnPosition()
