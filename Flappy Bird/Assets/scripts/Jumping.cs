@@ -41,5 +41,16 @@ public class Jumping : MonoBehaviour
         {
             GameManager.points += 1;
         }
+        Debug.Log(collision.gameObject.tag);
     }
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Time.timeScale = 0;
+        GameManager.instance.TryAgain();
+
+    }
+
+
 }

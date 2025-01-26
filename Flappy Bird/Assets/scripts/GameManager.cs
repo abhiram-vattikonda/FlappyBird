@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance { get; set; }
+
     private int prevpoint = -1;
     private Sprite tens;
     private Sprite ones;
@@ -16,10 +20,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<Texture2D> numbers = new List<Texture2D>();
     [SerializeField] private GameObject tensDisplay;
     [SerializeField] private GameObject onesDisplay;
+    [SerializeField] private GameObject TryAgainMenu;
+    [SerializeField] private TextMeshProUGUI scoreText;
 
     private SpriteRenderer tensRenderer;
     private SpriteRenderer onesRenderer;
 
+
+
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+    }
 
     private void Start()
     {
@@ -28,7 +41,9 @@ public class GameManager : MonoBehaviour
 
         tensRenderer = tensDisplay.GetComponent<SpriteRenderer>();
         onesRenderer = onesDisplay.GetComponent<SpriteRenderer>();
-       
+
+        TryAgainMenu.SetActive(false);
+
     }
 
     private void Update()
@@ -46,5 +61,19 @@ public class GameManager : MonoBehaviour
 
             prevpoint = points;
         }
+    }
+
+
+    public void TryAgain()
+    {
+        TryAgainMenu.SetActive(true);
+        scoreText.text = points.ToString();
+
+    }
+
+    public void ReTry()
+    {
+        SceneManager.LoadScene("GAME");
+        Time.timeScale = 1.0f;
     }
 }

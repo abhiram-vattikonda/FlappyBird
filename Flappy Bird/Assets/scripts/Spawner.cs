@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Spawner : MonoBehaviour
 {
 
@@ -10,14 +11,13 @@ public class Spawner : MonoBehaviour
     private float spawnRate = 1.5f;
     private float spawnTimer;
 
-    void Start()
+    private void Start()
     {
-        
+        spawnTimer = spawnRate;
     }
 
 
-
-    void Update()
+    private void Update()
     {
         if (spawnTimer < 0)
         {
@@ -25,8 +25,7 @@ public class Spawner : MonoBehaviour
             spawnTimer = spawnRate;
         }
         else
-            spawnTimer -= Time.deltaTime;
-        
+        { spawnTimer -= Time.deltaTime; }
     }
 
     private Vector3 PoleSpawnPosition()
