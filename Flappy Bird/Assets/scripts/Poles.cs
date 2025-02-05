@@ -11,16 +11,10 @@ public class Poles : MonoBehaviour
 
         if (transform.position.x < -15f)
         {
-            //GameManager.poles.Remove(this.gameObject);
             Destroy(this.gameObject);
 
         }
-        /*if (transform.position.x <= -2 && !GameManager.poles.Contains(this.gameObject))
-        {
-            GameManager.points += 1;
-            GameManager.poles.Add(this.gameObject);
-            Debug.Log(GameManager.points);
-        }*/
+
     }
 
 }

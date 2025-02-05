@@ -32,6 +32,7 @@ public class Jumping : MonoBehaviour
         playerInputActions.Player.Jump.performed += Jump_performed;
         if (jumpedAtleastOnce)
         {
+
             direction.y += gravity.y * Time.deltaTime;
             transform.position += direction * Time.deltaTime;
         }
@@ -43,7 +44,14 @@ public class Jumping : MonoBehaviour
         if(obj.performed)
         {
             direction = Vector3.up * strength;
-            if (!jumpedAtleastOnce) jumpedAtleastOnce = true;
+            if (!jumpedAtleastOnce)
+            {
+                jumpedAtleastOnce = true;
+                GetComponentInChildren<SpriteRenderer>().enabled = !GetComponentInChildren<SpriteRenderer>().enabled;
+                GameManager.instance.message.gameObject.SetActive(false);
+                GameManager.instance.tensDisplay.gameObject.SetActive(true);
+                GameManager.instance.onesDisplay.gameObject.SetActive(true);
+            }
         }
     }
 
@@ -51,7 +59,7 @@ public class Jumping : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("score"))
         {
-            GameManager.points += 1;
+            GameManager.points += 33;
         }
         Debug.Log(collision.gameObject.tag);
     }
